@@ -1,0 +1,20 @@
+﻿@model IEnumerable<PeerCentral.Domain.IUser>
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>title</h2>
+
+<ul id="users">
+    @foreach (var user in Model)
+    {
+        <li>@user.Name [<a href="#" data-id="@user.Id">login</a>]</li>
+    }
+</ul>
+
+
+@section scripts
+{
+   <script type="text/javascript" src="@Url.Content("/Scripts/ViewModels/Session/NewSessionViewModel.js")"></script>
+}
