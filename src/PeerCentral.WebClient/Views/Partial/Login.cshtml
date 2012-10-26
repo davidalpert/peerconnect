@@ -4,7 +4,7 @@
 {    
     <text>
         Hello, @Model.CurrentUser.Name
-        <form method="POST" action="/login" id="logoutForm">
+        <form method="POST" action="login" id="logoutForm">
             @Html.AntiForgeryToken()
             @Html.HttpMethodOverride("DELETE");
             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>

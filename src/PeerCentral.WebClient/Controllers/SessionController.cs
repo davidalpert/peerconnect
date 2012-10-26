@@ -47,7 +47,9 @@ namespace PeerCentral.WebClient.Controllers
         [HttpDelete]
         public ActionResult Destroy()
         {
-            throw new InvalidOperationException("here");
+            _runtimeSession.Logout();
+
+            return Redirect("~/");
         }
     }
 }

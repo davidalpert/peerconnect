@@ -1,10 +1,9 @@
+using System.Web.Mvc;
 using System.Web.Routing;
 using RestfulRouting;
 using PeerCentral.WebClient.Controllers;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(PeerCentral.WebClient.Routes), "Start")]
-
-namespace PeerCentral.WebClient
+namespace PeerCentral.WebClient.Configuration
 {
     public class Routes : RouteSet
     {
@@ -12,17 +11,19 @@ namespace PeerCentral.WebClient
         {
             map.DebugRoute("routedebug");
 
+            map.Root<HomeController>(c => c.Index());
+
             map.Resource<SessionController>(login =>
                                                 {
-                                                    login.Only("create", "new");
+                                                    login.Only("create", "new", "destroy");
                                                     login.As("login");
                                                 });
+
+            // to support partial requests
+            map.Route(new Route("partial/{action}",
+                                new RouteValueDictionary(new {controller = "partial"}),
+                                new MvcRouteHandler()));
         }
 
-        public static void Start()
-        {
-            var routes = RouteTable.Routes;
-            routes.MapRoutes<Routes>();
-        }
     }
 }
