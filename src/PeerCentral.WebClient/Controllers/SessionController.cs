@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using PeerCentral.Domain;
 using PeerCentral.WebClient.Models;
 
@@ -6,10 +7,12 @@ namespace PeerCentral.WebClient.Controllers
 {
     public class SessionController : ApplicationController
     {
-        private IRepository<User> _repository;
+        private readonly IRuntimeSession _runtimeSession;
+        private readonly IRepository<IUser> _repository;
 
-        public SessionController(IRepository<User> repository)
+        public SessionController(IRuntimeSession runtimeSession, IRepository<IUser> repository)
         {
+            _runtimeSession = runtimeSession;
             _repository = repository;
         }
 
@@ -17,9 +20,12 @@ namespace PeerCentral.WebClient.Controllers
         /// POST: /Login/
         /// </summary>
         [HttpPost]
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            var user = _repository.All().FirstOrDefault(u => u.Id.Equals(id ?? -1));
+            _runtimeSession.Login(user);
+
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>

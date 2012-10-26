@@ -1,8 +1,9 @@
 ﻿using System;
+using PeerCentral.Domain;
 
 namespace PeerCentral.WebClient.Models
 {
-    public class User
+    public class User : IUser
     {
         public String Name { get; set; }
 
