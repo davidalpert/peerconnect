@@ -1,0 +1,15 @@
+﻿@model IEnumerable<PeerCentral.WebClient.Models.User>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+
+<ul>
+   @foreach (var user in Model)
+   {
+    <li>@user.Name [@Html.ActionLink("login", "Create", new {id = user.Id})]</li>
+   }
+</ul>

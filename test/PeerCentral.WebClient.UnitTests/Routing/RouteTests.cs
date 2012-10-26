@@ -18,9 +18,15 @@ namespace PeerCentral.WebClient.UnitTests.Routing
         }
 
         [Test]
+        public void ItShouldMapToLoginControllerNew()
+        {
+            "~/login".ShouldMapTo<SessionController>(c => c.New());
+        }
+
+        [Test]
         public void ItShouldMapToLoginControllerCreate()
         {
-            "~/login".WithMethod(HttpVerbs.Post).ShouldMapTo<LoginController>(c => c.Create());
+            "~/login".WithMethod(HttpVerbs.Post).ShouldMapTo<SessionController>(c => c.Create());
         }
     }
 }
