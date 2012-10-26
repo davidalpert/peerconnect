@@ -13,17 +13,22 @@ namespace PeerCentral.WebClient.Configuration
 
             map.Root<HomeController>(c => c.Index());
 
-            map.Resource<SessionController>(login =>
-                                                {
-                                                    login.Only("create", "new", "destroy");
-                                                    login.As("login");
-                                                });
+            // use the standard restful routes for managing runtime Sessions:
+            map.Resource<SessionController>(c =>
+            {
+                c.Only("create", "new", "destroy");
+            });
 
-            // to support partial requests
+            // add human-friendly shortcuts for logging in and out:
+            map.Path("login").GetOnly().To<SessionController>(c => c.New()); 
+            map.Path("logout").GetOnly().To<HomeController>(c => c.Logout());
+
+            // HACK: add a standard MVC pattern-matching route limited 
+            //       to the PartialController to support calls like:
+            //       Html.RenderAction("login", "partial");
             map.Route(new Route("partial/{action}",
                                 new RouteValueDictionary(new {controller = "partial"}),
                                 new MvcRouteHandler()));
         }
-
     }
 }

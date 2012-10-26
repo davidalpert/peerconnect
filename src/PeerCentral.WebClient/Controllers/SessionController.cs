@@ -39,11 +39,6 @@ namespace PeerCentral.WebClient.Controllers
             return View(this._repository.All());
         }
 
-        public ActionResult Index()
-        {
-            throw new System.NotImplementedException();
-        }
-
         [HttpDelete]
         public ActionResult Destroy()
         {
