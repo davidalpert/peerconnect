@@ -1,6 +1,5 @@
 using System.Web;
 using PeerCentral.Domain;
-using PeerCentral.WebClient.Models;
 
 namespace PeerCentral.WebClient
 {
@@ -13,6 +12,9 @@ namespace PeerCentral.WebClient
             HttpContext.Current.Session[CURRENTUSERKEY] = user;
         }
 
-        public IUser CurrentUser { get { return HttpContext.Current.Session[CURRENTUSERKEY] as IUser; }}
+        public IUser CurrentUser
+        {
+            get { return HttpContext.Current.Session[CURRENTUSERKEY] as IUser; }
+        }
     }
 }

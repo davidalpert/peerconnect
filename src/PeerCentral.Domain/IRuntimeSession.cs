@@ -3,5 +3,6 @@
     public interface IRuntimeSession
     {
         void Login(IUser user);
+        IUser CurrentUser { get; }
     }
 }

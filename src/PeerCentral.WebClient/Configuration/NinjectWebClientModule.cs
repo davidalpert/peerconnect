@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Ninject.Modules;
 using PeerCentral.Domain;
 using PeerCentral.WebClient.Models;
@@ -10,13 +9,14 @@ namespace PeerCentral.WebClient.Configuration
     {
         public override void Load()
         {
-            this.Bind<IRepository<User>>().To<FakeUserRepository>();
+            this.Bind<IRuntimeSession>().To<HttpRuntimeSession>();
+            this.Bind<IRepository<IUser>>().To<FakeUserRepository>();
         }
     }
 
-    public class FakeUserRepository : IRepository<User>
+    public class FakeUserRepository : IRepository<IUser>
     {
-        public IQueryable<User> All()
+        public IQueryable<IUser> All()
         {
             return new[]
                        {
