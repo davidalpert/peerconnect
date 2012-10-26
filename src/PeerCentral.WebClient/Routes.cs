@@ -12,7 +12,11 @@ namespace PeerCentral.WebClient
         {
             map.DebugRoute("routedebug");
 
-            map.Resource<SessionController>(login => login.Only("create", "new"));
+            map.Resource<SessionController>(login =>
+                                                {
+                                                    login.Only("create", "new");
+                                                    login.As("login");
+                                                });
         }
 
         public static void Start()
