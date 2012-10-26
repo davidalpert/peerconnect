@@ -1,0 +1,17 @@
+﻿@model PeerCentral.Domain.IRuntimeSession
+
+@if (Model.CurrentUser != null)
+{    
+    <text>
+        Hello, @Model.CurrentUser.Name
+        <form method="POST" action="/login" id="logoutForm">
+            @Html.AntiForgeryToken()
+            @Html.HttpMethodOverride("DELETE");
+            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        </form>
+    </text>
+} else {
+    <ul>
+        <li><a href="login/new" id="loginLink">Login</a></li>
+    </ul>
+}
