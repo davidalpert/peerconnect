@@ -271,6 +271,9 @@
       <DependentUpon>knockout-2.1.0.debug.js</DependentUpon>
     </Content>
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\viewmodels\Session\NewSessionViewModel.js">
+      <DependentUpon>NewSessionViewModel.coffee</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -316,6 +319,14 @@
       <Project>{C125CBAE-8BA4-4EFF-997F-80940B48517F}</Project>
       <Name>PeerCentral.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\viewmodels\Session\NewSessionViewModel.coffee">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+      <Bare>False</Bare>
+      <Iced>False</Iced>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

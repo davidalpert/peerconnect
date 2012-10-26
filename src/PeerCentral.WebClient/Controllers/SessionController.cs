@@ -24,6 +24,7 @@ namespace PeerCentral.WebClient.Controllers
         public ActionResult Create(int? id)
         {
             var user = _repository.All().FirstOrDefault(u => u.Id.Equals(id ?? -1));
+            
             _runtimeSession.Login(user);
 
             return RedirectToAction("Index", "Home");

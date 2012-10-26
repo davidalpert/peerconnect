@@ -6,9 +6,15 @@
 
 <h2>title</h2>
 
-<ul>
-   @foreach (var user in Model)
-   {
-    <li>@user.Name [@Html.ActionLink("login", "Create", new {id = user.Id})]</li>
-   }
+<ul id="users">
+    @foreach (var user in Model)
+    {
+        <li>@user.Name [<a href="#" data-id="@user.Id">login</a>]</li>
+    }
 </ul>
+
+
+@section scripts
+{
+   <script type="text/javascript" src="@Url.Content("/Scripts/ViewModels/Session/NewSessionViewModel.js")"></script>
+}
