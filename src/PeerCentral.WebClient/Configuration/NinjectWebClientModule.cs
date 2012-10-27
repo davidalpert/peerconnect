@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ninject.Modules;
 using PeerCentral.Domain;
 using PeerCentral.WebClient.Models;
@@ -11,6 +12,15 @@ namespace PeerCentral.WebClient.Configuration
         {
             this.Bind<IRuntimeSession>().To<HttpRuntimeSession>();
             this.Bind<IRepository<IUser>>().To<FakeUserRepository>();
+            this.Bind<IRepository<IBrag>>().To<FakeBragRepository>();
+        }
+    }
+
+    public class FakeBragRepository : IRepository<IBrag>
+    {
+        public IQueryable<IBrag> All()
+        {
+            throw new NotImplementedException();
         }
     }
 

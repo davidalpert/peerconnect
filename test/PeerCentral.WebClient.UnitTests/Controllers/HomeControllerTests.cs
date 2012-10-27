@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using MvcContrib.TestHelper;
 using NUnit.Framework;
 using PeerCentral.Domain;
@@ -12,13 +14,15 @@ namespace PeerCentral.WebClient.UnitTests.Controllers
         private HomeController _controller;
         private TestControllerBuilder _builder;
         private IRuntimeSession _runtimeSession;
+        private IRepository<IBrag> _bragRepository;
 
         [SetUp]
         public void Setup()
         {
             this._builder = new TestControllerBuilder();
             this._runtimeSession = MockRepository.GenerateMock<IRuntimeSession>();
-            this._controller = _builder.CreateController<HomeController>(this._runtimeSession);
+            this._bragRepository = MockRepository.GenerateMock<IRepository<IBrag>>();
+            this._controller = _builder.CreateController<HomeController>(this._runtimeSession, this._bragRepository);
         }
 
         [Test]
@@ -26,6 +30,7 @@ namespace PeerCentral.WebClient.UnitTests.Controllers
         {
             // Given
             A_user_is_logged_in(1, "Mal");
+            var expectedBrags = There_are_recent_brags(10);
 
             // When
             var result = this._controller.Index();
@@ -37,6 +42,18 @@ namespace PeerCentral.WebClient.UnitTests.Controllers
 
             Assert.That(viewmodel.CurrentUser.Id, Is.EqualTo(1));
             Assert.That(viewmodel.CurrentUser.Name, Is.EqualTo("Mal"));
+            Assert.That(viewmodel.RecentBrags, Is.EqualTo(expectedBrags));
+        }
+
+        private IQueryable<IBrag> There_are_recent_brags(int n)
+        {
+            var recentBrags = Enumerable.Range(1, n-1)
+                            .Select(i => MockRepository.GenerateStub<IBrag>())
+                            .AsQueryable();
+
+            this._bragRepository.Stub(r => r.All()).Return(recentBrags);
+
+            return recentBrags;
         }
 
         [Test]
