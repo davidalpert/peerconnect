@@ -15,11 +15,12 @@ namespace PeerCentral.WebClient.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            if (_runtimeSession.IsAuthenticated == false)
+                return View("Home");
 
-            return View(new IndexViewModel
+            return View("Dashboard", new DashboardViewModel
             {
-                CurrentUser = this._runtimeSession.CurrentUser
+                CurrentUser = this._runtimeSession.GetCurrentUser()
             });
         }
 

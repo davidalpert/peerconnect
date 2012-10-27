@@ -1,0 +1,10 @@
+﻿@model PeerCentral.WebClient.Views.Home.DashboardViewModel
+
+@{
+    Model.PageTitle = "Dashboard [@Model.CurrentUser.Name] | PeerCentral";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome @Model.CurrentUser.Name</h2>
+
+<p>Your personal dashboard will appear here...</p>
