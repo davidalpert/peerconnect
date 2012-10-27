@@ -176,6 +176,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\DisplayModeConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Configuration\NinjectWebClientModule.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
@@ -326,6 +327,7 @@
       <Bare>False</Bare>
       <Iced>False</Iced>
     </None>
+    <Content Include="Views\Shared\_Layout.mobile.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
