@@ -7,6 +7,6 @@ namespace PeerCentral.WebClient.Models
     {
         public String Name { get; set; }
 
-        public int Id { get; set; }
+        public int? Id { get; set; }
     }
 }
