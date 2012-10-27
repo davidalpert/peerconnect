@@ -20,7 +20,15 @@ namespace PeerCentral.WebClient.Configuration
     {
         public IQueryable<IBrag> All()
         {
-            throw new NotImplementedException();
+            return Enumerable.Range(1, 5).Select(i => new Brag()
+            {
+                Id = i,
+                Title = "Brag #" + i,
+                Description = "This is the wonderful world of Braggart #" + i,
+                SubmittedOn = DateTime.Now,
+                Author = new User { Id = i * 100, Name = "User #" + 1 }
+            }
+            ).AsQueryable().Take(0);
         }
     }
 

@@ -1,3 +1,5 @@
+using System;
+
 namespace PeerCentral.Domain
 {
     /// <summary>
@@ -6,5 +8,9 @@ namespace PeerCentral.Domain
     /// </summary>
     public interface IBrag
     {
+        IUser Author { get; set; }
+        string Title { get; set; }
+        string Description { get; set; }
+        DateTime SubmittedOn { get; set; }
     }
 }

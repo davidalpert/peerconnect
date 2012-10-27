@@ -19,6 +19,8 @@ namespace PeerCentral.WebClient.Configuration
 
             map.Root<HomeController>(c => c.Index());
 
+            map.Resources<BragController>();
+
             // use the standard restful routes for managing runtime Sessions:
             map.Resource<SessionController>(c => c.Only("create", "new", "destroy"));
 

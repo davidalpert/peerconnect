@@ -5,6 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Welcome @Model.CurrentUser.Name</h2>
+<p class="welcome">Welcome @Model.CurrentUser.Name</p>
 
-<p>Your personal dashboard will appear here...</p>
+@if (Model.RecentBrags.Any())
+{
+    <h2>Recent news: </h2>
+    <ul>
+        @foreach (var brag in Model.RecentBrags)
+        {
+            <li>
+            <h4><span class="author">@brag.Author</span> says <em>@brag.Title</em></h4>
+                <p class="date">@brag.SubmittedOn</p>
+                <p>@brag.Description</p>
+            </li>
+        } 
+    </ul>
+}
+else
+{
+    <h2>No one is bragging yet...</h2>
+    <p>@Html.ActionLink("Be the first!", "new", "brag")</p>
+}
