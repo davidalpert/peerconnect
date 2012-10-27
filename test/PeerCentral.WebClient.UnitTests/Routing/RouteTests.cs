@@ -1,6 +1,9 @@
-﻿using System.Web.Routing;
+﻿using System.Web;
+using System.Web.Routing;
 using MvcContrib.TestHelper;
+using MvcContrib.TestHelper.Fakes;
 using NUnit.Framework;
+using PeerCentral.WebClient.App_Start;
 using PeerCentral.WebClient.Configuration;
 using PeerCentral.WebClient.Controllers;
 using System.Web.Mvc;
@@ -13,9 +16,7 @@ namespace PeerCentral.WebClient.UnitTests.Routing
         [SetUp]
         public void Setup()
         {
-            RouteTable.Routes.Clear();
-
-            RouteTable.Routes.MapRoutes<Routes>();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
 
         [Test]
